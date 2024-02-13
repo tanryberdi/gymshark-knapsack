@@ -5,12 +5,12 @@ import (
 )
 
 // Knapsack is a function to calculate the minimum number of items to make the target index
-func Knapsack(items []int, capacity int) (int, int, map[int]int) {
+func Knapsack(items []int, order int) (int, int, map[int]int) {
 	// Sort the items in ascending order
 	sort.Ints(items)
 
 	// Calculate the maximum capacity which may be larger than given capacity;
-	maxCapacity := capacity + items[0]
+	maxCapacity := order + items[0]
 
 	// dp array to store the minimum number of items to make the current index;
 	// init dp array and usedItem array;
@@ -40,7 +40,7 @@ func Knapsack(items []int, capacity int) (int, int, map[int]int) {
 
 	// Find the minimum amount we can make with the given items;
 	var minItemsAmount int
-	for i := capacity; i <= maxCapacity; i++ {
+	for i := order; i <= maxCapacity; i++ {
 		if dp[i] > 0 {
 			minItemsAmount = i
 			break

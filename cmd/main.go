@@ -22,7 +22,7 @@ func main() {
 	router.HandleFunc("/api/items", createItems).Methods("POST")
 
 	// Calculate the packages for the customer
-	router.HandleFunc("/api/calculate/{capacity}", getCapacity).Methods("GET")
+	router.HandleFunc("/api/calculate/{order}", getOrder).Methods("GET")
 
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
@@ -51,16 +51,16 @@ func getItem(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
 }
 
-func getCapacity(w http.ResponseWriter, r *http.Request) {
+func getOrder(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
-	capacity, err := strconv.Atoi(params["capacity"])
+	order, err := strconv.Atoi(params["order"])
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
 
-	//itemsToCustomer, packsToCustomer, usedPacks := pkg.Knapsack(items, capacity)
+	//itemsToCustomer, packsToCustomer, usedPacks := pkg.Knapsack(items, order)
 	/*
 		To further illustrate the rules above, please consider this custom pack size example:
 		items:[23, 31, 53]
@@ -68,7 +68,7 @@ func getCapacity(w http.ResponseWriter, r *http.Request) {
 		Correct Number of packs: 2x23, 7x31
 		Incorrect answer: 5x53
 	*/
-	_, packsToCustomer, _ := pkg.Knapsack(items, capacity)
+	_, packsToCustomer, _ := pkg.Knapsack(items, order)
 
 	json.NewEncoder(w).Encode(packsToCustomer)
 }

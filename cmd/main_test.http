@@ -17,6 +17,6 @@ Content-Type: application/json
 }
 
 ###
-### Get capacity and calculate
+### Get order and calculate
 ###
 GET http://localhost:8080/api/calculate/263

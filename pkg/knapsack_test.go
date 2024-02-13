@@ -4,8 +4,8 @@ import "testing"
 
 func TestKnapsack(t *testing.T) {
 	type args struct {
-		items    []int
-		capacity int
+		items []int
+		order int
 	}
 	tests := []struct {
 		name           string
@@ -17,8 +17,8 @@ func TestKnapsack(t *testing.T) {
 		{
 			name: "case-1",
 			args: args{
-				items:    []int{23, 31, 53},
-				capacity: 263,
+				items: []int{23, 31, 53},
+				order: 263,
 			},
 			minItemsAmount: 263,
 			minPacksAmount: 9,
@@ -30,8 +30,8 @@ func TestKnapsack(t *testing.T) {
 		{
 			name: "case-2",
 			args: args{
-				items:    []int{250, 500, 1000, 2000, 5000},
-				capacity: 1,
+				items: []int{250, 500, 1000, 2000, 5000},
+				order: 1,
 			},
 			minItemsAmount: 250,
 			minPacksAmount: 1,
@@ -42,8 +42,8 @@ func TestKnapsack(t *testing.T) {
 		{
 			name: "case-3",
 			args: args{
-				items:    []int{250, 500, 1000, 2000, 5000},
-				capacity: 250,
+				items: []int{250, 500, 1000, 2000, 5000},
+				order: 250,
 			},
 			minItemsAmount: 250,
 			minPacksAmount: 1,
@@ -54,8 +54,8 @@ func TestKnapsack(t *testing.T) {
 		{
 			name: "case-4",
 			args: args{
-				items:    []int{250, 500, 1000, 2000, 5000},
-				capacity: 251,
+				items: []int{250, 500, 1000, 2000, 5000},
+				order: 251,
 			},
 			minItemsAmount: 500,
 			minPacksAmount: 1,
@@ -66,8 +66,8 @@ func TestKnapsack(t *testing.T) {
 		{
 			name: "case-5",
 			args: args{
-				items:    []int{250, 500, 1000, 2000, 5000},
-				capacity: 501,
+				items: []int{250, 500, 1000, 2000, 5000},
+				order: 501,
 			},
 			minItemsAmount: 750,
 			minPacksAmount: 2,
@@ -79,8 +79,8 @@ func TestKnapsack(t *testing.T) {
 		{
 			name: "case-6",
 			args: args{
-				items:    []int{250, 500, 1000, 2000, 5000},
-				capacity: 12001,
+				items: []int{250, 500, 1000, 2000, 5000},
+				order: 12001,
 			},
 			minItemsAmount: 12250,
 			minPacksAmount: 4,
@@ -94,7 +94,7 @@ func TestKnapsack(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			itemsAmount, packsAmount, itemsMap := Knapsack(tt.args.items, tt.args.capacity)
+			itemsAmount, packsAmount, itemsMap := Knapsack(tt.args.items, tt.args.order)
 			if itemsAmount != tt.minItemsAmount {
 				t.Errorf("Knapsack() got = %v, want %v", itemsAmount, tt.minItemsAmount)
 			}
