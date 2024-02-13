@@ -43,7 +43,7 @@ make lint
 ## Source code is deployed to server and running for testing on online environment
 
 ### API Endpoint - For creating items (pack sizes)
-items - comma separated values
+items - comma separated values, for example: 23,31,53. You can change the values as per your requirement.
 ```curl
 curl -X POST --location "http://134.122.99.1:8080/api/items" \
     -H "Content-Type: application/json" \
@@ -53,6 +53,7 @@ curl -X POST --location "http://134.122.99.1:8080/api/items" \
 ```
 
 ### API Endpoint - For creating order
+263 is ordered items for the following request. Then endpoint returns the number of packs we need to ship to the customer.
 ```curl
 curl -X GET --location "http://134.122.99.1:8080/api/calculate/263"
 ```
