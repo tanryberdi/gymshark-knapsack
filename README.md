@@ -56,3 +56,8 @@ curl -X POST --location "http://134.122.99.1:8080/api/items" \
 ```curl
 curl -X GET --location "http://134.122.99.1:8080/api/calculate/263"
 ```
+
+### API Endpoint - For getting all items
+```curl
+curl -X GET --location "http://134.122.99.1:8080/api/items"
+```
