@@ -88,9 +88,9 @@ func createItems(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	itemsAsSttring := strings.Split(newItems.Items, ",")
+	itemsAsString := strings.Split(newItems.Items, ",")
 	items = nil
-	for _, item := range itemsAsSttring {
+	for _, item := range itemsAsString {
 		itemInt, err := strconv.Atoi(item)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
