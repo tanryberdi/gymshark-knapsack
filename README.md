@@ -43,6 +43,7 @@ make lint
 ## Source code is deployed to server and running for testing on online environment
 
 ### API Endpoint - For creating items (pack sizes)
+items - comma separated values
 ```curl
 curl -X POST --location "http://134.122.99.1:8080/api/items" \
     -H "Content-Type: application/json" \
