@@ -29,9 +29,10 @@ func main() {
 
 func getItems(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(items)
+	_ = json.NewEncoder(w).Encode(items)
 }
 
+// nolint: errcheck
 func getItem(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
@@ -43,7 +44,7 @@ func getItem(w http.ResponseWriter, r *http.Request) {
 
 	for index, item := range items {
 		if index == id {
-			json.NewEncoder(w).Encode(item)
+			_ = json.NewEncoder(w).Encode(item)
 			return
 		}
 	}
@@ -70,7 +71,7 @@ func getOrder(w http.ResponseWriter, r *http.Request) {
 	*/
 	_, packsToCustomer, _ := pkg.Knapsack(items, order)
 
-	json.NewEncoder(w).Encode(packsToCustomer)
+	_ = json.NewEncoder(w).Encode(packsToCustomer)
 }
 
 func createItems(w http.ResponseWriter, r *http.Request) {
@@ -98,5 +99,5 @@ func createItems(w http.ResponseWriter, r *http.Request) {
 		items = append(items, itemInt)
 	}
 
-	json.NewEncoder(w).Encode(newItems)
+	_ = json.NewEncoder(w).Encode(newItems)
 }
