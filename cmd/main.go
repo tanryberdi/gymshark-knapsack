@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"strconv"
@@ -16,6 +18,30 @@ var items []int
 
 func main() {
 	router := mux.NewRouter()
+
+	// Define a handler function for logging requests
+	loggingMiddleware := func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			// Read the request body
+			requestBody, err := ioutil.ReadAll(r.Body)
+			if err != nil {
+				http.Error(w, "Failed to read request body", http.StatusInternalServerError)
+				return
+			}
+
+			// Log the request method, URI, and body
+			log.Printf("%s %s - Body: %s", r.Method, r.RequestURI, string(requestBody))
+
+			// Replace the request body with a new buffer
+			r.Body = ioutil.NopCloser(bytes.NewBuffer(requestBody))
+
+			// Call the next handler in the chain
+			next.ServeHTTP(w, r)
+		})
+	}
+
+	// Use the logging middleware for all routes
+	router.Use(loggingMiddleware)
 
 	router.HandleFunc("/api/items", getItems).Methods("GET")
 	router.HandleFunc("/api/items/{id}", getItem).Methods("GET")
