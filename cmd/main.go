@@ -60,7 +60,14 @@ func getCapacity(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	//itemsToCustomer, packsToCustomer, usedPacs := pkg.Knapsack(items, capacity)
+	//itemsToCustomer, packsToCustomer, usedPacks := pkg.Knapsack(items, capacity)
+	/*
+		To further illustrate the rules above, please consider this custom pack size example:
+		items:[23, 31, 53]
+		Items order: 263
+		Correct Number of packs: 2x23, 7x31
+		Incorrect answer: 5x53
+	*/
 	_, packsToCustomer, _ := pkg.Knapsack(items, capacity)
 
 	json.NewEncoder(w).Encode(packsToCustomer)
