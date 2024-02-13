@@ -1,0 +1,22 @@
+###
+GET http://localhost:8080/api/items
+
+###
+### Get item by id
+###
+GET http://localhost:8080/api/items/1
+
+###
+### Create items
+###
+POST http://localhost:8080/api/items
+Content-Type: application/json
+
+{
+  "items": "23,31,53"
+}
+
+###
+### Get capacity and calculate
+###
+GET http://localhost:8080/api/calculate/263
